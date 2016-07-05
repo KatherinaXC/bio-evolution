@@ -1,3 +1,4 @@
+package io.github.katherinaxc.bioevosim;
 
 public abstract class Creature implements Comparable<Creature> {
 	int stat;
