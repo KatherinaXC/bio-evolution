@@ -24,6 +24,7 @@ public class Program {
 			board.feast();
 			board.checkSurvivors();
 			board.reproduce();
+			//
 		}
 		/*
 		 * StdDraw.setPenRadius(0.05); StdDraw.setPenColor(StdDraw.BLUE);
