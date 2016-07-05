@@ -1,4 +1,5 @@
 package io.github.katherinaxc.bioevosim;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -49,9 +50,11 @@ public class Board {
 	public void reproduce() {
 		for (int i = predators.size() - 1; i >= 0; i--) {
 			predators.addAll(predators.get(i).reproduce());
+			predators.remove(i);
 		}
 		for (int i = prey.size() - 1; i >= 0; i--) {
 			prey.addAll(prey.get(i).reproduce());
+			prey.remove(i);
 		}
 	}
 
@@ -65,7 +68,7 @@ public class Board {
 			current.reposition(rand.nextInt(sizeX), rand.nextInt(sizeY));
 		}
 	}
-	
+
 	public void sortByStat() {
 		Collections.sort(predators);
 	}
