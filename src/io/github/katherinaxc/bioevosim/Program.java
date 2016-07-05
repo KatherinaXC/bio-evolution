@@ -17,6 +17,7 @@ public class Program {
 		int upperBound = console.nextInt();
 		System.out.println("How many iterations to run?");
 		int iterations = console.nextInt();
+		console.close();
 		Board board = new Board(sizeX, sizeY, countEach, lowerBound, upperBound);
 		for (int i = 0; i < iterations; i++) {
 			board.randomize();
@@ -24,12 +25,15 @@ public class Program {
 			board.feast();
 			board.checkSurvivors();
 			board.reproduce();
-			//
+			drawBoard(board);
 		}
-		/*
-		 * StdDraw.setPenRadius(0.05); StdDraw.setPenColor(StdDraw.BLUE);
-		 * StdDraw.point(0.5, 0.5); StdDraw.setPenColor(StdDraw.MAGENTA);
-		 * StdDraw.line(0.2, 0.2, 0.8, 0.2);
-		 */
+	}
+
+	public static void drawBoard(Board board) {
+		StdDraw.setPenRadius(0.05);
+		StdDraw.setPenColor(StdDraw.BLUE);
+		StdDraw.point(0.5, 0.5);
+		StdDraw.setPenColor(StdDraw.MAGENTA);
+		StdDraw.line(0.2, 0.2, 0.8, 0.2);
 	}
 }
