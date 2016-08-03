@@ -97,4 +97,22 @@ public class Board {
 		}
 		return list;
 	}
+
+	private ArrayList<Predator> getPredatorsInCell(int coordX, int coordY) {
+		ArrayList<Predator> list = new ArrayList<Predator>();
+		for (int i = 0; i < predators.size(); i++) {
+			Predator testing = predators.get(i);
+			if (testing.coordX == coordX && testing.coordY == coordY) {
+				list.add(testing);
+			}
+		}
+		return list;
+	}
+
+	public ArrayList<Creature> getCellContents(int coordX, int coordY) {
+		ArrayList<Creature> results = new ArrayList<Creature>();
+		results.addAll(getPredatorsInCell(coordX, coordY));
+		results.addAll(getPreyInCell(coordX, coordY));
+		return results;
+	}
 }
