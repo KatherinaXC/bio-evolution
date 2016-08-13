@@ -1,5 +1,6 @@
 package io.github.katherinaxc.bioevosim;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Program {
@@ -37,7 +38,8 @@ public class Program {
 	}
 
 	public static void initBoard(Board board) {
-		int dim = Math.min(800, Math.max(board.sizeX, board.sizeY) * 25);
+		int dim = Math.min(800, Math.max(board.sizeX, board.sizeY) * 100);
+		StdDraw.setPenColor();
 		StdDraw.setCanvasSize(dim, dim);
 		StdDraw.setScale(-.05, 1.05);
 		StdDraw.setPenRadius(0.005);
@@ -47,17 +49,40 @@ public class Program {
 	}
 
 	public static void updateBoard(Board board) {
+	}
 
+	public static void drawCreatureStat(Creature creature, double posX, double posY, double size) {
+		if (creature instanceof Predator) {
+			StdDraw.setPenColor(StdDraw.RED);
+		} else {
+			StdDraw.setPenColor(StdDraw.GREEN);
+		}
+		StdDraw.circle(posX, posY, size);
+		StdDraw.text(posX, posY, "" + creature.stat);
+	}
+
+	public static void drawCellContents(Board board, int coordX, int coordY) {
+		ArrayList<Creature> cellcontents = board.getCellContents(coordX, coordY);
+		double cellWidth = cellDimension(coordX);
+		double cellHeight = cellDimension(coordY);
+		double posTop = cellHeight * (coordY + 1);
+		double posBot = cellHeight * coordY;
+		double posLeft = cellWidth * coordX;
+		double posRight = cellWidth * (coordX + 1);
 	}
 
 	public static void drawCardsGrid(int cellsX, int cellsY) {
-		double cellWidth = 1. / cellsX;
-		double cellHeight = 1. / cellsY;
+		double cellWidth = cellDimension(cellsX);
+		double cellHeight = cellDimension(cellsY);
 		for (int i = 0; i <= cellsX; i++) {
 			StdDraw.line(i * cellWidth, 0, i * cellWidth, 1);
 		}
 		for (int i = 0; i <= cellsY; i++) {
 			StdDraw.line(0, i * cellHeight, 1, i * cellHeight);
 		}
+	}
+
+	public static double cellDimension(int dimension) {
+		return 1. / dimension;
 	}
 }
