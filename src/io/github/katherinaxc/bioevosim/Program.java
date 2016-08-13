@@ -37,7 +37,7 @@ public class Program {
 	}
 
 	public static void initBoard(Board board) {
-		int dim = 800;
+		int dim = Math.min(800, Math.max(board.sizeX, board.sizeY) * 25);
 		StdDraw.setCanvasSize(dim, dim);
 		StdDraw.setScale(-.05, 1.05);
 		StdDraw.setPenRadius(0.005);
