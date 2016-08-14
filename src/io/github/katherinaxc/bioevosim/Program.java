@@ -1,7 +1,6 @@
 package io.github.katherinaxc.bioevosim;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Program {
 	public static void main(String[] args) {
@@ -44,11 +43,15 @@ public class Program {
 		StdDraw.setScale(-.05, 1.05);
 		StdDraw.setPenRadius(0.005);
 		drawCardsGrid(board.sizeX, board.sizeY);
-		StdDraw.circle(0.5, 0.5, 0.015);
 		StdDraw.textRight(1, -0.025, "Click or Space Key To Advance");
 	}
 
 	public static void updateBoard(Board board) {
+		for (int posX = 0; posX < board.sizeX; posX++) {
+			for (int posY = 0; posY < board.sizeY; posY++) {
+				drawCellContents(board, posX, posY);
+			}
+		}
 	}
 
 	public static void drawCreatureStat(Creature creature, double posX, double posY, double size) {
@@ -69,6 +72,15 @@ public class Program {
 		double posBot = cellHeight * coordY;
 		double posLeft = cellWidth * coordX;
 		double posRight = cellWidth * (coordX + 1);
+		double intervalUD = (posTop - posBot) / 4;
+		double intervalLR = (posRight - posLeft) / 4;
+		int creatureNum = 0;
+		for (int i = 1; i <= cellcontents.size() / 3; i++) {
+			for (int j = 1; j <= 3; j++) {
+				drawCreatureStat(cellcontents.get(creatureNum), intervalLR * j, intervalUD * i, 25);
+				creatureNum++;
+			}
+		}
 	}
 
 	public static void drawCardsGrid(int cellsX, int cellsY) {
