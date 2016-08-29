@@ -66,8 +66,8 @@ public class Program {
 
 	public static void drawCellContents(Board board, int coordX, int coordY) {
 		ArrayList<Creature> cellcontents = board.getCellContents(coordX, coordY);
-		double cellWidth = cellDimension(coordX);
-		double cellHeight = cellDimension(coordY);
+		double cellWidth = cellDimension(board.sizeX);
+		double cellHeight = cellDimension(board.sizeY);
 		double posTop = cellHeight * (coordY + 1);
 		double posBot = cellHeight * coordY;
 		double posLeft = cellWidth * coordX;
@@ -75,9 +75,10 @@ public class Program {
 		double intervalUD = (posTop - posBot) / 4;
 		double intervalLR = (posRight - posLeft) / 4;
 		int creatureNum = 0;
-		for (int i = 1; i <= cellcontents.size() / 3; i++) {
-			for (int j = 1; j <= 3; j++) {
-				drawCreatureStat(cellcontents.get(creatureNum), intervalLR * j, intervalUD * i, 25);
+		for (int i = 0; i < ((double) cellcontents.size()) / 3.; i++) {
+			for (int j = 0; j <= 3 && creatureNum < cellcontents.size(); j++) {
+				drawCreatureStat(cellcontents.get(creatureNum), intervalLR * (j + 1), intervalUD * (i + 1),
+						Math.min(cellWidth, cellHeight) / 9);
 				creatureNum++;
 			}
 		}
