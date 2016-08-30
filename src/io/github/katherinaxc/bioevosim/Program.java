@@ -3,7 +3,7 @@ package io.github.katherinaxc.bioevosim;
 import java.util.ArrayList;
 
 public class Program {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		// Scanner console = new Scanner(System.in);
 		// System.out.println("Starting board X?");
 		// int sizeX = console.nextInt();
@@ -22,7 +22,7 @@ public class Program {
 		int upperBound = 8;
 		// System.out.println("How many iterations to run?");
 		// int iterations = console.nextInt();
-		int iterations = 1;
+		int iterations = 2;
 		// console.close();
 		Board board = new Board(sizeX, sizeY, countEach, lowerBound, upperBound);
 		initBoard(board);
@@ -33,6 +33,12 @@ public class Program {
 			board.feast();
 			board.checkSurvivors();
 			board.reproduce();
+			while (!StdDraw.mousePressed()) {
+				// Wait until mouse click to move on, check every 1/10sec
+				// TODO replace this with a more reliable mechanism, and also
+				// add keyboard update support
+				Thread.sleep(100);
+			}
 		}
 	}
 
@@ -42,11 +48,13 @@ public class Program {
 		StdDraw.setCanvasSize(dim, dim);
 		StdDraw.setScale(-.05, 1.05);
 		StdDraw.setPenRadius(0.005);
-		drawCardsGrid(board.sizeX, board.sizeY);
-		StdDraw.textRight(1, -0.025, "Click or Space Key To Advance");
 	}
 
 	public static void updateBoard(Board board) {
+		StdDraw.clear();
+		StdDraw.setPenColor();
+		drawCardsGrid(board.sizeX, board.sizeY);
+		StdDraw.textRight(1, -0.025, "Click or Space Key To Advance");
 		for (int posX = 0; posX < board.sizeX; posX++) {
 			for (int posY = 0; posY < board.sizeY; posY++) {
 				drawCellContents(board, posX, posY);
