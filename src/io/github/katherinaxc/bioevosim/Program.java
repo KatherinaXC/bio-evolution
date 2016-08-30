@@ -36,7 +36,7 @@ public class Program {
 			while (!StdDraw.mousePressed()) {
 				// Wait until mouse click to move on, check every 1/10sec
 				// TODO replace this with a more reliable mechanism, and also
-				// add keyboard update support
+				// add keyboard update support.
 				Thread.sleep(100);
 			}
 		}
