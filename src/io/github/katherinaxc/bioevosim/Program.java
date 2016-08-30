@@ -77,8 +77,8 @@ public class Program {
 		int creatureNum = 0;
 		for (int i = 0; i < ((double) cellcontents.size()) / 3.; i++) {
 			for (int j = 0; j <= 3 && creatureNum < cellcontents.size(); j++) {
-				drawCreatureStat(cellcontents.get(creatureNum), intervalLR * (j + 1), intervalUD * (i + 1),
-						Math.min(cellWidth, cellHeight) / 9);
+				drawCreatureStat(cellcontents.get(creatureNum), posLeft + intervalLR * (j + 1),
+						posBot + intervalUD * (i + 1), Math.min(cellWidth, cellHeight) / 9);
 				creatureNum++;
 			}
 		}
