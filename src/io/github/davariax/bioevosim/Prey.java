@@ -1,4 +1,4 @@
-package io.github.katherinaxc.bioevosim;
+package io.github.davariax.bioevosim;
 import java.util.ArrayList;
 
 public class Prey extends Creature {

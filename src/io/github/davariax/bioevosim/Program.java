@@ -1,4 +1,4 @@
-package io.github.katherinaxc.bioevosim;
+package io.github.davariax.bioevosim;
 
 import java.util.ArrayList;
 
@@ -24,6 +24,7 @@ public class Program {
 		// int iterations = console.nextInt();
 		int iterations = 10;
 		// console.close();
+		// TODO add number input system
 		Board board = new Board(sizeX, sizeY, countEach, lowerBound, upperBound);
 		initBoard(board);
 		for (int i = 0; i < iterations; i++) {
@@ -35,8 +36,8 @@ public class Program {
 			board.reproduce();
 			while (!StdDraw.mousePressed()) {
 				// Wait until mouse click to move on, check every 1/10sec
-				// TODO replace this with a more reliable mechanism, and also
-				// add keyboard update support.
+				// TODO replace this with a more reliable mechanism
+				// TODO add keyboard update support.
 				Thread.sleep(100);
 			}
 		}

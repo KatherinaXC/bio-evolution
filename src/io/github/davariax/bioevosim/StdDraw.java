@@ -1,4 +1,4 @@
-package io.github.katherinaxc.bioevosim;
+package io.github.davariax.bioevosim;
 
 /******************************************************************************
  *  Compilation:  javac StdDraw.java

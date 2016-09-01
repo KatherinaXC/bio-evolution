@@ -1,4 +1,4 @@
-package io.github.katherinaxc.bioevosim;
+package io.github.davariax.bioevosim;
 
 import java.util.ArrayList;
 import java.util.Collections;
