@@ -21,8 +21,9 @@ public abstract class Creature implements Comparable<Creature> {
 		this.coordX = coordX;
 		this.coordY = coordY;
 	}
-	
+
 	public int compareTo(Creature other) {
-	    return Integer.compare(this.stat, other.stat);
+		// Sort from highest to lowest!!!
+		return Integer.compare(other.stat, this.stat);
 	}
 }

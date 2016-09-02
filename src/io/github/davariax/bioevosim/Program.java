@@ -36,7 +36,6 @@ public class Program {
 			board.reproduce();
 			while (!StdDraw.mousePressed() && !(StdDraw.hasNextKeyTyped() && StdDraw.nextKeyTyped() == ' ')) {
 				// Wait until mouse click or keypress to move on
-				// TODO replace this with a more reliable mechanism
 				Thread.sleep(100);
 			}
 		}

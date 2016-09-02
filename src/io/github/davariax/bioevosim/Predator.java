@@ -1,4 +1,5 @@
 package io.github.davariax.bioevosim;
+
 import java.util.ArrayList;
 
 public class Predator extends Creature {
@@ -8,14 +9,14 @@ public class Predator extends Creature {
 	}
 
 	public void eat(ArrayList<Prey> cellmates) {
-		if (cellmates.size() > 0) {
+		if (cellmates.size() > 0 && preyAreEdible(cellmates)) {
 			int lowestvisible = 0;
 			int loweststat = cellmates.get(lowestvisible).stat;
 			for (int i = 0; i < cellmates.size(); i++) {
-				int currentstat = cellmates.get(i).stat;
-				if (currentstat < loweststat) {
+				int testingstat = cellmates.get(i).stat;
+				if (testingstat < loweststat) {
 					lowestvisible = i;
-					loweststat = currentstat;
+					loweststat = testingstat;
 				}
 			}
 			Prey target = cellmates.get(lowestvisible);
@@ -41,6 +42,18 @@ public class Predator extends Creature {
 			offspring.add(new Predator(this.stat, this.board, this.coordX, this.coordY));
 		}
 		return offspring;
+	}
+
+	private boolean preyAreEdible(ArrayList<Prey> prey) {
+		boolean edible = false;
+		if (prey.size() > 0) {
+			for (int i = 0; i < prey.size(); i++) {
+				if (prey.get(i).stat < this.stat) {
+					edible = true;
+				}
+			}
+		}
+		return edible;
 	}
 
 }

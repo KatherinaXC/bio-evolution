@@ -71,6 +71,7 @@ public class Board {
 
 	public void sortByStat() {
 		Collections.sort(predators);
+		Collections.sort(prey);
 	}
 
 	private void populatePredators(int number, int lowerBounds, int upperBounds) {
