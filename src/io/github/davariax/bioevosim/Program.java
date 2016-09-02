@@ -34,10 +34,9 @@ public class Program {
 			board.feast();
 			board.checkSurvivors();
 			board.reproduce();
-			while (!StdDraw.mousePressed()) {
-				// Wait until mouse click to move on, check every 1/10sec
+			while (!StdDraw.mousePressed() && !(StdDraw.hasNextKeyTyped() && StdDraw.nextKeyTyped() == ' ')) {
+				// Wait until mouse click or keypress to move on
 				// TODO replace this with a more reliable mechanism
-				// TODO add keyboard update support.
 				Thread.sleep(100);
 			}
 		}
