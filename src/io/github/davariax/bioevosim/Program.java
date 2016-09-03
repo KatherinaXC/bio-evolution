@@ -53,6 +53,7 @@ public class Program {
 		StdDraw.setPenColor();
 		drawCardsGrid(board.sizeX, board.sizeY);
 		StdDraw.textRight(1, -0.025, "Click or Space Key To Advance");
+		StdDraw.textLeft(0, -0.025, "Iteration " + (board.generation + 1));
 		for (int posX = 0; posX < board.sizeX; posX++) {
 			for (int posY = 0; posY < board.sizeY; posY++) {
 				drawCellContents(board, posX, posY);

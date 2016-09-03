@@ -58,6 +58,7 @@ public class Board {
 			prey.addAll(prey.get(i).reproduce());
 			prey.remove(i);
 		}
+		this.generation++;
 	}
 
 	public void randomize() {
