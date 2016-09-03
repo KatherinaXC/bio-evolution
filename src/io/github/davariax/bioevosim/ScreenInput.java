@@ -41,6 +41,7 @@ public class ScreenInput {
 			// Wait until mouse click in button area to move on
 			Thread.sleep(100);
 		}
+		StdDraw.setMousePressed(false);
 		return 5;
 	}
 

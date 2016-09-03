@@ -42,6 +42,7 @@ public class Program {
 				// Wait until mouse click or keypress to move on
 				Thread.sleep(100);
 			}
+			StdDraw.setMousePressed(false);
 		}
 	}
 
