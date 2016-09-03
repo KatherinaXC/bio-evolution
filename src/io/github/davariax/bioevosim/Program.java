@@ -1,6 +1,10 @@
 package io.github.davariax.bioevosim;
 
 import java.util.ArrayList;
+//TODO: Merge all magic numbers into public static final variables
+//TODO: Add stats export functionality, a la what people need from the simulation
+//TODO: Add checks/defaults on the starting parameters
+//TODO: Figure out what else I have to do
 
 public class Program {
 	static int dimCreatSquare;
