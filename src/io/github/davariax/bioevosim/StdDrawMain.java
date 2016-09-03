@@ -437,7 +437,7 @@ import javax.swing.KeyStroke;
  * @author Robert Sedgewick
  * @author Kevin Wayne
  */
-public final class StdDraw implements ActionListener, MouseListener, MouseMotionListener, KeyListener {
+public final class StdDrawMain implements ActionListener, MouseListener, MouseMotionListener, KeyListener {
 
 	/**
 	 * The color black.
@@ -567,7 +567,7 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 	private static Graphics2D offscreen, onscreen;
 
 	// singleton for callbacks: avoids generation of extra .class files
-	private static StdDraw std = new StdDraw();
+	private static StdDrawMain std = new StdDrawMain();
 
 	// the frame for drawing to the screen
 	private static JFrame frame;
@@ -588,7 +588,7 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 	private static long nextDraw = -1;
 
 	// singleton pattern: client can't instantiate
-	private StdDraw() {
+	private StdDrawMain() {
 	}
 
 	// static initializer
@@ -945,7 +945,7 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 	public static void setFont(Font font) {
 		if (font == null)
 			throw new NullPointerException();
-		StdDraw.font = font;
+		StdDrawMain.font = font;
 	}
 
 	/***************************************************************************
@@ -1363,7 +1363,7 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 
 		// in case file is inside a .jar (classpath relative to StdDraw)
 		try {
-			URL url = StdDraw.class.getResource(filename);
+			URL url = StdDrawMain.class.getResource(filename);
 			BufferedImage image = ImageIO.read(url);
 			return image;
 		} catch (IOException e) {
@@ -1372,7 +1372,7 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 
 		// in case file is inside a .jar (classpath relative to root of jar)
 		try {
-			URL url = StdDraw.class.getResource("/" + filename);
+			URL url = StdDrawMain.class.getResource("/" + filename);
 			BufferedImage image = ImageIO.read(url);
 			return image;
 		} catch (IOException e) {
@@ -1781,11 +1781,11 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		FileDialog chooser = new FileDialog(StdDraw.frame, "Use a .png or .jpg extension", FileDialog.SAVE);
+		FileDialog chooser = new FileDialog(StdDrawMain.frame, "Use a .png or .jpg extension", FileDialog.SAVE);
 		chooser.setVisible(true);
 		String filename = chooser.getFile();
 		if (filename != null) {
-			StdDraw.save(chooser.getDirectory() + File.separator + chooser.getFile());
+			StdDrawMain.save(chooser.getDirectory() + File.separator + chooser.getFile());
 		}
 	}
 
@@ -1854,8 +1854,8 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 	@Override
 	public void mousePressed(MouseEvent e) {
 		synchronized (mouseLock) {
-			mouseX = StdDraw.userX(e.getX());
-			mouseY = StdDraw.userY(e.getY());
+			mouseX = StdDrawMain.userX(e.getX());
+			mouseY = StdDrawMain.userY(e.getY());
 			mousePressed = true;
 		}
 	}
@@ -1876,8 +1876,8 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		synchronized (mouseLock) {
-			mouseX = StdDraw.userX(e.getX());
-			mouseY = StdDraw.userY(e.getY());
+			mouseX = StdDrawMain.userX(e.getX());
+			mouseY = StdDrawMain.userY(e.getY());
 		}
 	}
 
@@ -1887,8 +1887,8 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 	@Override
 	public void mouseMoved(MouseEvent e) {
 		synchronized (mouseLock) {
-			mouseX = StdDraw.userX(e.getX());
-			mouseY = StdDraw.userY(e.getY());
+			mouseX = StdDrawMain.userX(e.getX());
+			mouseY = StdDrawMain.userY(e.getY());
 		}
 	}
 
@@ -1984,26 +1984,26 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 	 * Test client.
 	 */
 	public static void main(String[] args) {
-		StdDraw.square(.2, .8, .1);
-		StdDraw.filledSquare(.8, .8, .2);
-		StdDraw.circle(.8, .2, .2);
+		StdDrawMain.square(.2, .8, .1);
+		StdDrawMain.filledSquare(.8, .8, .2);
+		StdDrawMain.circle(.8, .2, .2);
 
-		StdDraw.setPenColor(StdDraw.BOOK_RED);
-		StdDraw.setPenRadius(.02);
-		StdDraw.arc(.8, .2, .1, 200, 45);
+		StdDrawMain.setPenColor(StdDrawMain.BOOK_RED);
+		StdDrawMain.setPenRadius(.02);
+		StdDrawMain.arc(.8, .2, .1, 200, 45);
 
 		// draw a blue diamond
-		StdDraw.setPenRadius();
-		StdDraw.setPenColor(StdDraw.BOOK_BLUE);
+		StdDrawMain.setPenRadius();
+		StdDrawMain.setPenColor(StdDrawMain.BOOK_BLUE);
 		double[] x = { .1, .2, .3, .2 };
 		double[] y = { .2, .3, .2, .1 };
-		StdDraw.filledPolygon(x, y);
+		StdDrawMain.filledPolygon(x, y);
 
 		// text
-		StdDraw.setPenColor(StdDraw.BLACK);
-		StdDraw.text(0.2, 0.5, "black text");
-		StdDraw.setPenColor(StdDraw.WHITE);
-		StdDraw.text(0.8, 0.8, "white text");
+		StdDrawMain.setPenColor(StdDrawMain.BLACK);
+		StdDrawMain.text(0.2, 0.5, "black text");
+		StdDrawMain.setPenColor(StdDrawMain.WHITE);
+		StdDrawMain.text(0.8, 0.8, "white text");
 	}
 
 }

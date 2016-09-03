@@ -37,7 +37,7 @@ public class Program {
 			board.feast();
 			board.checkSurvivors();
 			board.reproduce();
-			while (!StdDraw.mousePressed() && !(StdDraw.hasNextKeyTyped() && StdDraw.nextKeyTyped() == ' ')) {
+			while (!StdDrawMain.mousePressed() && !(StdDrawMain.hasNextKeyTyped() && StdDrawMain.nextKeyTyped() == ' ')) {
 				// Wait until mouse click or keypress to move on
 				Thread.sleep(100);
 			}
@@ -46,17 +46,17 @@ public class Program {
 
 	public static void initBoard(Board board) {
 		int dim = Math.min(1000, Math.max(board.sizeX, board.sizeY) * 150);
-		StdDraw.setPenColor();
-		StdDraw.setCanvasSize(dim, dim);
-		StdDraw.setScale(-.05, 1.05);
-		StdDraw.setPenRadius(0.005);
+		StdDrawMain.setPenColor();
+		StdDrawMain.setCanvasSize(dim, dim);
+		StdDrawMain.setScale(-.05, 1.05);
+		StdDrawMain.setPenRadius(0.005);
 	}
 
 	public static void updateBoard(Board board) {
-		StdDraw.clear();
-		StdDraw.setPenColor();
+		StdDrawMain.clear();
+		StdDrawMain.setPenColor();
 		drawCardsGrid(board.sizeX, board.sizeY);
-		StdDraw.textRight(1, -0.025, "Click or Space Key To Advance");
+		StdDrawMain.textRight(1, -0.025, "Click or Space Key To Advance");
 		for (int posX = 0; posX < board.sizeX; posX++) {
 			for (int posY = 0; posY < board.sizeY; posY++) {
 				drawCellContents(board, posX, posY);
@@ -66,12 +66,12 @@ public class Program {
 
 	public static void drawCreatureStat(Creature creature, double posX, double posY, double size) {
 		if (creature instanceof Predator) {
-			StdDraw.setPenColor(StdDraw.RED);
+			StdDrawMain.setPenColor(StdDrawMain.RED);
 		} else {
-			StdDraw.setPenColor(StdDraw.GREEN);
+			StdDrawMain.setPenColor(StdDrawMain.GREEN);
 		}
-		StdDraw.circle(posX, posY, size);
-		StdDraw.text(posX, posY, "" + creature.stat);
+		StdDrawMain.circle(posX, posY, size);
+		StdDrawMain.text(posX, posY, "" + creature.stat);
 	}
 
 	public static void drawCellContents(Board board, int coordX, int coordY) {
@@ -98,10 +98,10 @@ public class Program {
 		double cellWidth = cellDimension(cellsX);
 		double cellHeight = cellDimension(cellsY);
 		for (int i = 0; i <= cellsX; i++) {
-			StdDraw.line(i * cellWidth, 0, i * cellWidth, 1);
+			StdDrawMain.line(i * cellWidth, 0, i * cellWidth, 1);
 		}
 		for (int i = 0; i <= cellsY; i++) {
-			StdDraw.line(0, i * cellHeight, 1, i * cellHeight);
+			StdDrawMain.line(0, i * cellHeight, 1, i * cellHeight);
 		}
 	}
 

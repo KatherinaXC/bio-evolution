@@ -1,9 +1,14 @@
 package io.github.davariax.bioevosim;
 
 public class ScreenInput {
-	StdDraw drawpanel;
+	StdDrawInput inputpanel;
 
-	public ScreenInput(StdDraw stddraw) {
-		this.drawpanel = stddraw;
+	public ScreenInput(StdDrawInput stddraw) {
+		this.inputpanel = stddraw;
 	}
+
+	public int query(String prompt) {
+		// TODO
+	}
+
 }
