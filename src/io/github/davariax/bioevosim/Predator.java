@@ -26,7 +26,7 @@ public class Predator extends Creature {
 	}
 
 	public boolean canSurvive(int generation) {
-		if (is_hungry && (generation - this.birthgeneration) > 1) {
+		if (this.is_hungry && (generation - this.birthgeneration) > 1) {
 			return false;
 		} else {
 			return true;
@@ -35,11 +35,13 @@ public class Predator extends Creature {
 
 	public ArrayList<Predator> reproduce() {
 		ArrayList<Predator> offspring = new ArrayList<Predator>();
-		offspring.add(new Predator(this.stat + 1, this.board, this.coordX, this.coordY));
-		if (this.stat > 1) {
-			offspring.add(new Predator(this.stat - 1, this.board, this.coordX, this.coordY));
+		if (!this.is_hungry) {
+			offspring.add(new Predator(this.stat + 1, this.board, this.coordX, this.coordY));
+			if (this.stat > 1) {
+				offspring.add(new Predator(this.stat - 1, this.board, this.coordX, this.coordY));
+			}
 		} else {
-			offspring.add(new Predator(this.stat, this.board, this.coordX, this.coordY));
+			offspring.add(this);
 		}
 		return offspring;
 	}

@@ -3,6 +3,8 @@ package io.github.davariax.bioevosim;
 import java.util.ArrayList;
 
 public class Program {
+	static int dimCreatSquare;
+
 	public static void main(String[] args) throws InterruptedException {
 		// Scanner console = new Scanner(System.in);
 		// System.out.println("Starting board X?");
@@ -22,7 +24,8 @@ public class Program {
 		int upperBound = 8;
 		// System.out.println("How many iterations to run?");
 		// int iterations = console.nextInt();
-		int iterations = 10;
+		int iterations = 100;
+		dimCreatSquare = 4;
 		// console.close();
 		// TODO add number input system
 		Board board = new Board(sizeX, sizeY, countEach, lowerBound, upperBound);
@@ -42,7 +45,7 @@ public class Program {
 	}
 
 	public static void initBoard(Board board) {
-		int dim = Math.min(800, Math.max(board.sizeX, board.sizeY) * 100);
+		int dim = Math.min(1000, Math.max(board.sizeX, board.sizeY) * 150);
 		StdDraw.setPenColor();
 		StdDraw.setCanvasSize(dim, dim);
 		StdDraw.setScale(-.05, 1.05);
@@ -79,13 +82,13 @@ public class Program {
 		double posBot = cellHeight * coordY;
 		double posLeft = cellWidth * coordX;
 		double posRight = cellWidth * (coordX + 1);
-		double intervalUD = (posTop - posBot) / 4;
-		double intervalLR = (posRight - posLeft) / 4;
+		double intervalUD = (posTop - posBot) / (dimCreatSquare + 1);
+		double intervalLR = (posRight - posLeft) / (dimCreatSquare + 1);
 		int creatureNum = 0;
-		for (int i = 0; i < ((double) cellcontents.size()) / 3.; i++) {
-			for (int j = 0; j < 3 && creatureNum < cellcontents.size(); j++) {
+		for (int i = 0; i < ((double) cellcontents.size()) / dimCreatSquare; i++) {
+			for (int j = 0; j < dimCreatSquare && creatureNum < cellcontents.size(); j++) {
 				drawCreatureStat(cellcontents.get(creatureNum), posLeft + intervalLR * (j + 1),
-						posBot + intervalUD * (i + 1), Math.min(cellWidth, cellHeight) / 9);
+						posBot + intervalUD * (i + 1), Math.min(cellWidth, cellHeight) / (2 * (dimCreatSquare + 2)));
 				creatureNum++;
 			}
 		}

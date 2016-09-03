@@ -49,8 +49,10 @@ public class Board {
 
 	public void reproduce() {
 		for (int i = predators.size() - 1; i >= 0; i--) {
-			predators.addAll(predators.get(i).reproduce());
-			predators.remove(i);
+			if (!predators.get(i).is_hungry) {
+				predators.addAll(predators.get(i).reproduce());
+				predators.remove(i);
+			}
 		}
 		for (int i = prey.size() - 1; i >= 0; i--) {
 			prey.addAll(prey.get(i).reproduce());
