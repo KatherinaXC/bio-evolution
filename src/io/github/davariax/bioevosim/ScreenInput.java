@@ -13,8 +13,12 @@ public class ScreenInput {
 		StdDraw.setPenRadius(0.005);
 	}
 
-	public static double[] reset() {
+	public static double[] reset(String prompt) {
 		StdDraw.clear();
+		// Prompt question
+		StdDraw.text(((double) 1) / 2, ((double) 1) * 3 / 4, prompt);
+		// Instructions
+		StdDraw.textRight(1, ((double) 1) / 10, "Press - to clear");
 		// Input box
 		double inputCenterX = ((double) 1) / 2;
 		double inputCenterXDim = ((double) 1) * 2 / 5;
@@ -28,40 +32,103 @@ public class ScreenInput {
 		double submitCenterYDim = ((double) 1) / 10;
 		StdDraw.rectangle(submitCenterX, submitCenterY, submitCenterXDim, submitCenterYDim);
 		StdDraw.text(submitCenterX, submitCenterY, "Submit");
-		// returns coords of submit button corners
+		// returns coords of submit button corners and input center
 		return new double[] { submitCenterX - submitCenterXDim, submitCenterX + submitCenterXDim,
-				submitCenterY - submitCenterYDim, submitCenterY + submitCenterYDim };
+				submitCenterY - submitCenterYDim, submitCenterY + submitCenterYDim, inputCenterX, inputCenterY };
+	}
+
+	public static void updateInput(double[] inputbox, int num) {
+		StdDraw.text(inputbox[0], inputbox[1], "" + num);
 	}
 
 	public static int queryInt(String prompt) throws InterruptedException {
-		double[] submitcoords = ScreenInput.reset();
-		// TODO
+		double[] coords = ScreenInput.reset(prompt);
+		double[] submitcoords = { coords[0], coords[1], coords[2], coords[3] };
+		double[] inputcoords = { coords[4], coords[5] };
 		StdDraw.show();
-		while (!submitButtonPressed(submitcoords) && !enterKeyPressed()) {
-			// Wait until mouse click in button area to move on
+		int result = 0;
+		while (!buttonPressed(submitcoords) && !enterKeyPressed()) {
+			if (numberPressed()) {
+				char number = StdDraw.nextKeyTyped();
+				int intnumber = Character.getNumericValue(number);
+				result = (result * 10) + intnumber;
+				ScreenInput.reset(prompt);
+				ScreenInput.updateInput(inputcoords, result);
+			} else if (dashPressed()) {
+				result = 0;
+				ScreenInput.reset(prompt);
+				ScreenInput.updateInput(inputcoords, result);
+			}
+			// Wait until mouse click or enter key to move on
+			ScreenInput.clearKeys();
 			Thread.sleep(100);
+			StdDraw.show();
 		}
+		// Reset mouse status
 		StdDraw.setMousePressed(false);
-		return 5;
+		return result;
 	}
 
-	public static boolean submitButtonPressed(double[] submitcoords) {
+	public static boolean buttonPressed(double[] coords) {
 		double coordX = StdDraw.mouseX();
 		double coordY = StdDraw.mouseY();
-		return StdDraw.mousePressed() && coordX >= submitcoords[0] && coordX <= submitcoords[1]
-				&& coordY >= submitcoords[2] && coordY <= submitcoords[3];
+		return StdDraw.mousePressed() && coordX >= coords[0] && coordX <= coords[1] && coordY >= coords[2]
+				&& coordY <= coords[3];
+	}
+
+	public static boolean numberPressed() {
+		// Does not remove key from keylist regardless of situation
+		if (StdDraw.hasNextKeyTyped()) {
+			char key = StdDraw.nextKeyTyped();
+			StdDraw.addKeyTyped(key);
+			if (key == '1' || key == '2' || key == '3' || key == '4' || key == '5' || key == '6' || key == '7'
+					|| key == '8' || key == '9' || key == '0') {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static boolean dashPressed() {
+		if (StdDraw.hasNextKeyTyped()) {
+			char key = StdDraw.nextKeyTyped();
+			if (key == '-') {
+				return true;
+			}
+			StdDraw.addKeyTyped(key);
+		}
+		return false;
 	}
 
 	public static boolean enterKeyPressed() {
 		if (StdDraw.hasNextKeyTyped()) {
 			char key = StdDraw.nextKeyTyped();
-			return (key == '\n' || key == '\r');
+			if (key == '\n' || key == '\r') {
+				return true;
+			}
+			// Replace the key that was tested
+			StdDraw.addKeyTyped(key);
 		}
 		return false;
 	}
 
 	public static boolean spaceKeyPressed() {
-		return (StdDraw.hasNextKeyTyped() && StdDraw.nextKeyTyped() == ' ');
+		if (StdDraw.hasNextKeyTyped()) {
+			char key = StdDraw.nextKeyTyped();
+			if (key == ' ') {
+				return true;
+			}
+			// Replace the key that was tested
+			StdDraw.addKeyTyped(key);
+		}
+		return false;
+	}
+
+	public static void clearKeys() {
+		// Clears all of StdDraw's saved keys
+		while (StdDraw.hasNextKeyTyped()) {
+			StdDraw.nextKeyTyped();
+		}
 	}
 
 }

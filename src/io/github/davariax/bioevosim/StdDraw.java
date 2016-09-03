@@ -2006,10 +2006,14 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 		StdDraw.text(0.8, 0.8, "white text");
 	}
 
-	// Extra methods that davariax put in because they couldn't figure out why
-	// mousePressed wasn't working properly! >:[
+	// Extra methods that davariax put in because they couldn't be bothered to
+	// fix their own code! >:[
 	public static void setMousePressed(boolean newsetting) {
 		mousePressed = newsetting;
+	}
+
+	public static void addKeyTyped(char e) {
+		keysTyped.addFirst(e);
 	}
 
 }
