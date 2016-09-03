@@ -6,10 +6,11 @@ public class Program {
 	static int dimCreatSquare;
 
 	public static void main(String[] args) throws InterruptedException {
+		ScreenInput.initInput(400, 300);
 		// Scanner console = new Scanner(System.in);
 		// System.out.println("Starting board X?");
 		// int sizeX = console.nextInt();
-		int sizeX = 5;
+		int sizeX = ScreenInput.queryInt("Starting board X?");
 		// System.out.println("Starting board Y?");
 		// int sizeY = console.nextInt();
 		int sizeY = 5;
@@ -27,7 +28,7 @@ public class Program {
 		int iterations = 100;
 		dimCreatSquare = 4;
 		// console.close();
-		// TODO add number input system
+		// TODO fix number input system
 		Board board = new Board(sizeX, sizeY, countEach, lowerBound, upperBound);
 		initBoard(board);
 		for (int i = 0; i < iterations; i++) {
@@ -37,7 +38,7 @@ public class Program {
 			board.feast();
 			board.checkSurvivors();
 			board.reproduce();
-			while (!StdDrawMain.mousePressed() && !(StdDrawMain.hasNextKeyTyped() && StdDrawMain.nextKeyTyped() == ' ')) {
+			while (!StdDraw.mousePressed() && !ScreenInput.spaceKeyPressed()) {
 				// Wait until mouse click or keypress to move on
 				Thread.sleep(100);
 			}
@@ -46,32 +47,34 @@ public class Program {
 
 	public static void initBoard(Board board) {
 		int dim = Math.min(1000, Math.max(board.sizeX, board.sizeY) * 150);
-		StdDrawMain.setPenColor();
-		StdDrawMain.setCanvasSize(dim, dim);
-		StdDrawMain.setScale(-.05, 1.05);
-		StdDrawMain.setPenRadius(0.005);
+		StdDraw.enableDoubleBuffering();
+		StdDraw.setPenColor();
+		StdDraw.setCanvasSize(dim, dim);
+		StdDraw.setScale(-.05, 1.05);
+		StdDraw.setPenRadius(0.005);
 	}
 
 	public static void updateBoard(Board board) {
-		StdDrawMain.clear();
-		StdDrawMain.setPenColor();
+		StdDraw.clear();
+		StdDraw.setPenColor();
 		drawCardsGrid(board.sizeX, board.sizeY);
-		StdDrawMain.textRight(1, -0.025, "Click or Space Key To Advance");
+		StdDraw.textRight(1, -0.025, "Click or Space Key To Advance");
 		for (int posX = 0; posX < board.sizeX; posX++) {
 			for (int posY = 0; posY < board.sizeY; posY++) {
 				drawCellContents(board, posX, posY);
 			}
 		}
+		StdDraw.show();
 	}
 
 	public static void drawCreatureStat(Creature creature, double posX, double posY, double size) {
 		if (creature instanceof Predator) {
-			StdDrawMain.setPenColor(StdDrawMain.RED);
+			StdDraw.setPenColor(StdDraw.RED);
 		} else {
-			StdDrawMain.setPenColor(StdDrawMain.GREEN);
+			StdDraw.setPenColor(StdDraw.GREEN);
 		}
-		StdDrawMain.circle(posX, posY, size);
-		StdDrawMain.text(posX, posY, "" + creature.stat);
+		StdDraw.circle(posX, posY, size);
+		StdDraw.text(posX, posY, "" + creature.stat);
 	}
 
 	public static void drawCellContents(Board board, int coordX, int coordY) {
@@ -98,10 +101,10 @@ public class Program {
 		double cellWidth = cellDimension(cellsX);
 		double cellHeight = cellDimension(cellsY);
 		for (int i = 0; i <= cellsX; i++) {
-			StdDrawMain.line(i * cellWidth, 0, i * cellWidth, 1);
+			StdDraw.line(i * cellWidth, 0, i * cellWidth, 1);
 		}
 		for (int i = 0; i <= cellsY; i++) {
-			StdDrawMain.line(0, i * cellHeight, 1, i * cellHeight);
+			StdDraw.line(0, i * cellHeight, 1, i * cellHeight);
 		}
 	}
 
