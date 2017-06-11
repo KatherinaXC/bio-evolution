@@ -1,30 +1,39 @@
 package io.github.asyncviridian.bioevosim;
 
 import java.util.ArrayList;
-//TODO: Merge all magic numbers into public static final variables
 //TODO: Add stats export functionality, a la what people need from the simulation
 //TODO: Figure out what else I have to do
 
 public class Program {
+	public static final int INPUT_DIM_X = 400;
+	public static final int INPUT_DIM_Y = 300;
+	public static final int DEFAULT_SIZEX = 5;
+	public static final int DEFAULT_SIZEY = 5;
+	public static final int DEFAULT_COUNT = 8;
+	public static final int DEFAULT_STATLOW = 2;
+	public static final int DEFAULT_STATHI = 8;
+	public static final int DEFAULT_ITERATIONS = 100;
+	public static final int DEFAULT_SQRCONTENT_DIM = 4;
+
 	static int dimCreatSquare;
 
 	public static void main(String[] args) throws InterruptedException {
-		ScreenInput.initInput(400, 300);
+		ScreenInput.initInput(INPUT_DIM_X, INPUT_DIM_Y);
 		// If the user types in something broken here...
 		// I'll just throw exceptions ¯\_(ツ)_/¯
-		int sizeX = ScreenInput.queryInt("Starting board X?", 5);
-		// int sizeX = 5
-		int sizeY = ScreenInput.queryInt("Starting board Y?", 5);
-		// int sizeY = 5;
-		int countEach = ScreenInput.queryInt("Starting board predator/prey count EACH?", 8);
-		// int countEach = 8;
-		int lowerBound = ScreenInput.queryInt("Starting stat lower bound?", 2);
-		// int lowerBound = 2;
-		int upperBound = ScreenInput.queryInt("Starting stat upper bound?", 8);
-		// int upperBound = 8;
-		int iterations = ScreenInput.queryInt("How many iterations to run?", 100);
-		// int iterations = 100;
-		dimCreatSquare = 4;
+		int sizeX = ScreenInput.queryInt("Starting board X?", DEFAULT_SIZEX);
+		// int sizeX = DEFAULT_SIZEX;
+		int sizeY = ScreenInput.queryInt("Starting board Y?", DEFAULT_SIZEY);
+		// int sizeY = DEFAULT_SIZEY;
+		int countEach = ScreenInput.queryInt("Starting board predator/prey count EACH?", DEFAULT_COUNT);
+		// int countEach = DEFAULT_COUNT;
+		int lowerBound = ScreenInput.queryInt("Starting stat lower bound?", DEFAULT_STATLOW);
+		// int lowerBound = DEFAULT_STATLOW;
+		int upperBound = ScreenInput.queryInt("Starting stat upper bound?", DEFAULT_STATHI);
+		// int upperBound = DEFAULT_STATHI;
+		int iterations = ScreenInput.queryInt("How many iterations to run?", DEFAULT_ITERATIONS);
+		// int iterations = DEFAULT_ITERATIONS;
+		dimCreatSquare = DEFAULT_SQRCONTENT_DIM;
 		// console.close();
 		Board board = new Board(sizeX, sizeY, countEach, lowerBound, upperBound);
 		initBoard(board);
