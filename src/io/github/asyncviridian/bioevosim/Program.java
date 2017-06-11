@@ -2,7 +2,7 @@ package io.github.asyncviridian.bioevosim;
 
 import java.util.ArrayList;
 //TODO: Add stats export functionality, a la what people need from the simulation
-//TODO: Figure out what else I have to do
+//TODO: Figure out what else I have to do?
 
 public class Program {
 	public static final int INPUT_DIM_X = 400;

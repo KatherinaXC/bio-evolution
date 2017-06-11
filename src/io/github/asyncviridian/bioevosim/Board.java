@@ -24,7 +24,6 @@ public class Board {
 	}
 
 	public void feast() {
-		// Not the Tkaanie kind :3
 		// Works from largest stat to smallest stat predators
 		for (int i = 0; i < predators.size(); i++) {
 			Predator current = predators.get(i);
@@ -75,6 +74,11 @@ public class Board {
 	public void sortByStat() {
 		Collections.sort(predators);
 		Collections.sort(prey);
+	}
+
+	public String toString() {
+		// TODO implement this.
+		return "TODO implement this";
 	}
 
 	private void populatePredators(int number, int lowerBounds, int upperBounds) {
