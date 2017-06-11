@@ -1,4 +1,4 @@
-package io.github.davariax.bioevosim;
+package io.github.asyncviridian.bioevosim;
 
 public class ScreenInput {
 
@@ -41,12 +41,13 @@ public class ScreenInput {
 		StdDraw.text(inputbox[0], inputbox[1], "" + num);
 	}
 
-	public static int queryInt(String prompt) throws InterruptedException {
+	public static int queryInt(String prompt, int defaultResult) throws InterruptedException {
 		double[] coords = ScreenInput.reset(prompt);
 		double[] submitcoords = { coords[0], coords[1], coords[2], coords[3] };
 		double[] inputcoords = { coords[4], coords[5] };
 		StdDraw.show();
-		int result = 0;
+		int result = defaultResult;
+		ScreenInput.updateInput(inputcoords, result);
 		while (!buttonPressed(submitcoords) && !enterKeyPressed()) {
 			if (numberPressed()) {
 				char number = StdDraw.nextKeyTyped();
@@ -67,6 +68,10 @@ public class ScreenInput {
 		// Reset mouse status
 		StdDraw.setMousePressed(false);
 		return result;
+	}
+
+	public static int queryInt(String prompt) throws InterruptedException {
+		return queryInt(prompt, 0);
 	}
 
 	public static boolean buttonPressed(double[] coords) {

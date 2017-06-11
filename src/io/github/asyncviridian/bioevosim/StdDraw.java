@@ -1,4 +1,4 @@
-package io.github.davariax.bioevosim;
+package io.github.asyncviridian.bioevosim;
 
 /******************************************************************************
  *  Compilation:  javac StdDraw.java

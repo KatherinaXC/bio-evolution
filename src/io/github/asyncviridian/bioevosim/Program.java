@@ -1,9 +1,8 @@
-package io.github.davariax.bioevosim;
+package io.github.asyncviridian.bioevosim;
 
 import java.util.ArrayList;
 //TODO: Merge all magic numbers into public static final variables
 //TODO: Add stats export functionality, a la what people need from the simulation
-//TODO: Add checks/defaults on the starting parameters
 //TODO: Figure out what else I have to do
 
 public class Program {
@@ -11,17 +10,19 @@ public class Program {
 
 	public static void main(String[] args) throws InterruptedException {
 		ScreenInput.initInput(400, 300);
-		int sizeX = ScreenInput.queryInt("Starting board X?");
+		// If the user types in something broken here...
+		// I'll just throw exceptions ¯\_(ツ)_/¯
+		int sizeX = ScreenInput.queryInt("Starting board X?", 5);
 		// int sizeX = 5
-		int sizeY = ScreenInput.queryInt("Starting board Y?");
+		int sizeY = ScreenInput.queryInt("Starting board Y?", 5);
 		// int sizeY = 5;
-		int countEach = ScreenInput.queryInt("Starting board predator/prey count EACH?");
+		int countEach = ScreenInput.queryInt("Starting board predator/prey count EACH?", 8);
 		// int countEach = 8;
-		int lowerBound = ScreenInput.queryInt("Starting stat lower bound?");
+		int lowerBound = ScreenInput.queryInt("Starting stat lower bound?", 2);
 		// int lowerBound = 2;
-		int upperBound = ScreenInput.queryInt("Starting stat upper bound?");
+		int upperBound = ScreenInput.queryInt("Starting stat upper bound?", 8);
 		// int upperBound = 8;
-		int iterations = ScreenInput.queryInt("How many iterations to run?");
+		int iterations = ScreenInput.queryInt("How many iterations to run?", 100);
 		// int iterations = 100;
 		dimCreatSquare = 4;
 		// console.close();
@@ -34,7 +35,7 @@ public class Program {
 			board.feast();
 			board.checkSurvivors();
 			board.reproduce();
-			while (!StdDraw.mousePressed() && !ScreenInput.spaceKeyPressed()) {
+			while (!StdDraw.mousePressed() && !ScreenInput.enterKeyPressed()) {
 				// Wait until mouse click or correct keypress to move on
 				ScreenInput.clearKeys();
 				Thread.sleep(100);
@@ -56,7 +57,7 @@ public class Program {
 		StdDraw.clear();
 		StdDraw.setPenColor();
 		drawCardsGrid(board.sizeX, board.sizeY);
-		StdDraw.textRight(1, -0.025, "Click or Space Key To Advance");
+		StdDraw.textRight(1, -0.025, "Click or Enter Key To Advance");
 		StdDraw.textLeft(0, -0.025, "Iteration " + (board.generation + 1));
 		for (int posX = 0; posX < board.sizeX; posX++) {
 			for (int posY = 0; posY < board.sizeY; posY++) {

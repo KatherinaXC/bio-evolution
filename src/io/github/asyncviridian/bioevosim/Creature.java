@@ -1,4 +1,4 @@
-package io.github.davariax.bioevosim;
+package io.github.asyncviridian.bioevosim;
 
 public abstract class Creature implements Comparable<Creature> {
 	int stat;
